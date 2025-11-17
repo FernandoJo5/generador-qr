@@ -1,0 +1,1448 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>FerEnglish - Aprende inglés paso a paso</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    :root {
+      --green: #16a34a;
+      --green-soft: #bbf7d0;
+      --bg: #f3f4f6;
+      --bg-alt: #ffffff;
+      --text: #111827;
+      --muted: #6b7280;
+      --border: #e5e7eb;
+      --accent: #22c55e;
+      --danger: #ef4444;
+    }
+
+    body.dark {
+      --bg: #020617;
+      --bg-alt: #020617;
+      --text: #f9fafb;
+      --muted: #9ca3af;
+      --border: #1f2937;
+      --green-soft: #064e3b;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        sans-serif;
+    }
+
+    body {
+      background: radial-gradient(circle at top left, #bbf7d0 0, transparent 40%),
+                  radial-gradient(circle at bottom right, #a5b4fc 0, transparent 45%),
+                  var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      padding: 1.5rem;
+    }
+
+    .app-shell {
+      max-width: 1180px;
+      margin: 0 auto;
+      background: rgba(255, 255, 255, 0.8);
+      backdrop-filter: blur(16px);
+      border-radius: 1.5rem;
+      border: 1px solid rgba(148, 163, 184, 0.3);
+      box-shadow: 0 18px 50px rgba(15, 23, 42, 0.25);
+      overflow: hidden;
+    }
+
+    body.dark .app-shell {
+      background: rgba(15, 23, 42, 0.9);
+      border-color: rgba(51, 65, 85, 0.9);
+    }
+
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem 1.75rem;
+      border-bottom: 1px solid var(--border);
+      background: linear-gradient(90deg, #16a34a, #065f46);
+      color: #ecfdf5;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .brand-logo {
+      width: 40px;
+      height: 40px;
+      border-radius: 999px;
+      border: 2px solid #bbf7d0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 1.1rem;
+      background: rgba(6, 95, 70, 0.9);
+      box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.5);
+    }
+
+    .brand-text h1 {
+      font-size: 1.25rem;
+      line-height: 1.2;
+    }
+
+    .brand-text p {
+      font-size: 0.78rem;
+      opacity: 0.9;
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-size: 0.8rem;
+    }
+
+    .pill {
+      padding: 0.3rem 0.75rem;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.3);
+      border: 1px solid rgba(209, 250, 229, 0.3);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+
+    .pill span.level-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: #22c55e;
+    }
+
+    .btn-small {
+      padding: 0.3rem 0.7rem;
+      border-radius: 999px;
+      border: 1px solid rgba(209, 250, 229, 0.5);
+      background: rgba(15, 23, 42, 0.35);
+      color: #ecfdf5;
+      cursor: pointer;
+      font-size: 0.78rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+    }
+
+    .btn-small:hover {
+      background: rgba(15, 23, 42, 0.55);
+    }
+
+    /* Layout */
+    .content {
+      display: grid;
+      grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+      gap: 1rem;
+      padding: 1.25rem 1.75rem 1.5rem;
+    }
+
+    @media (max-width: 900px) {
+      .content {
+        grid-template-columns: 1fr;
+      }
+      header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.75rem;
+      }
+    }
+
+    .card {
+      background: var(--bg-alt);
+      border-radius: 1rem;
+      border: 1px solid var(--border);
+      padding: 1rem;
+      box-shadow: 0 8px 20px rgba(15, 23, 42, 0.06);
+    }
+
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.5rem;
+    }
+
+    .card-header h2 {
+      font-size: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .card-header h2 span.icon {
+      font-size: 1.15rem;
+    }
+
+    .card-subtitle {
+      font-size: 0.8rem;
+      color: var(--muted);
+      margin-bottom: 0.5rem;
+    }
+
+    /* Auth section */
+    #authSection {
+      padding: 1.25rem 1.75rem 0.75rem;
+      border-bottom: 1px dashed var(--border);
+    }
+
+    .auth-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
+      gap: 1.5rem;
+    }
+
+    @media (max-width: 900px) {
+      .auth-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .hero-title {
+      font-size: 1.3rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .hero-highlight {
+      display: inline-block;
+      background: var(--green-soft);
+      color: #064e3b;
+      padding: 0.15rem 0.55rem;
+      border-radius: 999px;
+      font-size: 0.78rem;
+      margin-bottom: 0.35rem;
+    }
+
+    .hero-text {
+      font-size: 0.9rem;
+      color: var(--muted);
+      margin-bottom: 0.75rem;
+    }
+
+    .hero-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-top: 0.5rem;
+    }
+
+    .hero-badge {
+      font-size: 0.78rem;
+      padding: 0.2rem 0.55rem;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: rgba(240, 253, 244, 0.9);
+      color: #064e3b;
+    }
+
+    body.dark .hero-badge {
+      background: #022c22;
+      border-color: #064e3b;
+      color: #bbf7d0;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 0.65rem;
+      font-size: 0.86rem;
+    }
+
+    label {
+      font-weight: 500;
+      margin-bottom: 0.15rem;
+      display: inline-block;
+    }
+
+    input[type="text"],
+    select,
+    textarea {
+      width: 100%;
+      padding: 0.5rem 0.6rem;
+      border-radius: 0.6rem;
+      border: 1px solid var(--border);
+      background: rgba(249, 250, 251, 0.9);
+      font-size: 0.86rem;
+      color: var(--text);
+    }
+
+    body.dark input[type="text"],
+    body.dark select,
+    body.dark textarea {
+      background: #020617;
+      border-color: #1f2937;
+      color: #e5e7eb;
+    }
+
+    input:focus,
+    select:focus,
+    textarea:focus {
+      outline: 2px solid var(--green);
+      outline-offset: 1px;
+      border-color: transparent;
+    }
+
+    .btn-primary {
+      margin-top: 0.3rem;
+      padding: 0.55rem 1rem;
+      border-radius: 999px;
+      border: none;
+      background: linear-gradient(135deg, #22c55e, #16a34a);
+      color: white;
+      font-weight: 600;
+      cursor: pointer;
+      font-size: 0.9rem;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.4rem;
+      box-shadow: 0 12px 25px rgba(22, 163, 74, 0.35);
+    }
+
+    .btn-primary:hover {
+      filter: brightness(1.05);
+      transform: translateY(-1px);
+    }
+
+    .btn-secondary {
+      padding: 0.4rem 0.8rem;
+      border-radius: 0.75rem;
+      border: 1px solid var(--border);
+      background: transparent;
+      cursor: pointer;
+      font-size: 0.8rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+    }
+
+    .btn-secondary:hover {
+      background: rgba(148, 163, 184, 0.12);
+    }
+
+    /* XP / rewards */
+    .xp-wrapper {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.75rem;
+      margin-top: 0.5rem;
+    }
+
+    .xp-bar {
+      flex: 1;
+      height: 8px;
+      border-radius: 999px;
+      background: #e5e7eb;
+      overflow: hidden;
+      position: relative;
+    }
+
+    body.dark .xp-bar {
+      background: #111827;
+    }
+
+    .xp-fill {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, #22c55e, #a3e635);
+      transition: width 0.25s ease;
+    }
+
+    .xp-label {
+      font-size: 0.76rem;
+      color: var(--muted);
+      white-space: nowrap;
+    }
+
+    .badge-row {
+      display: flex;
+      gap: 0.25rem;
+      margin-top: 0.35rem;
+      flex-wrap: wrap;
+    }
+
+    .badge {
+      font-size: 0.7rem;
+      padding: 0.2rem 0.45rem;
+      border-radius: 999px;
+      border: 1px dashed var(--border);
+      background: rgba(22, 163, 74, 0.06);
+    }
+
+    .badge.locked {
+      opacity: 0.4;
+    }
+
+    /* Lessons */
+    .lesson-filters {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 0.4rem;
+      margin-bottom: 0.6rem;
+    }
+
+    .pill-select {
+      padding: 0.3rem 0.6rem;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      font-size: 0.78rem;
+      background: transparent;
+    }
+
+    .lesson-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.55rem;
+      max-height: 340px;
+      overflow-y: auto;
+      padding-right: 0.2rem;
+    }
+
+    .lesson-card {
+      border-radius: 0.9rem;
+      border: 1px solid var(--border);
+      padding: 0.6rem 0.7rem;
+      background: rgba(249, 250, 251, 0.9);
+      display: grid;
+      grid-template-columns: minmax(0, 1.5fr) auto;
+      gap: 0.5rem;
+      align-items: center;
+      font-size: 0.82rem;
+    }
+
+    body.dark .lesson-card {
+      background: #020617;
+    }
+
+    @media (max-width: 600px) {
+      .lesson-card {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .lesson-title {
+      font-weight: 600;
+      margin-bottom: 0.1rem;
+    }
+
+    .lesson-meta {
+      font-size: 0.74rem;
+      color: var(--muted);
+      display: flex;
+      gap: 0.4rem;
+      flex-wrap: wrap;
+      margin-bottom: 0.15rem;
+    }
+
+    .lesson-objective {
+      font-size: 0.78rem;
+      color: var(--muted);
+    }
+
+    .lesson-actions {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 0.3rem;
+    }
+
+    .btn-ghost {
+      padding: 0.25rem 0.65rem;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: transparent;
+      font-size: 0.76rem;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+
+    .btn-ghost:hover {
+      background: rgba(148, 163, 184, 0.12);
+    }
+
+    .btn-complete {
+      padding: 0.28rem 0.65rem;
+      border-radius: 999px;
+      border: none;
+      background: #22c55e;
+      color: white;
+      font-size: 0.78rem;
+      cursor: pointer;
+      white-space: nowrap;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.25rem;
+    }
+
+    .btn-complete.completed {
+      background: #16a34a;
+      opacity: 0.85;
+    }
+
+    /* Tools column */
+    .tools-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 0.7rem;
+    }
+
+    .translator-layout {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 0.4rem;
+      margin-top: 0.3rem;
+    }
+
+    textarea {
+      min-height: 70px;
+      resize: vertical;
+    }
+
+    .translator-controls {
+      display: flex;
+      justify-content: space-between;
+      gap: 0.4rem;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .translator-note {
+      font-size: 0.7rem;
+      color: var(--muted);
+      margin-top: 0.25rem;
+    }
+
+    .stats {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.45rem;
+      font-size: 0.76rem;
+      margin-top: 0.4rem;
+    }
+
+    .stat-pill {
+      padding: 0.25rem 0.5rem;
+      border-radius: 0.75rem;
+      background: rgba(22, 163, 74, 0.06);
+      border: 1px solid rgba(22, 163, 74, 0.18);
+    }
+
+    /* Mini practice */
+    .mini-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+      margin-top: 0.3rem;
+      font-size: 0.82rem;
+    }
+
+    .mini-item {
+      padding: 0.4rem 0.5rem;
+      border-radius: 0.75rem;
+      border: 1px dashed var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    .mini-btn {
+      font-size: 0.74rem;
+      padding: 0.22rem 0.55rem;
+      border-radius: 999px;
+      border: none;
+      cursor: pointer;
+      background: #0ea5e9;
+      color: white;
+    }
+
+    .mini-tag {
+      font-size: 0.7rem;
+      color: var(--muted);
+    }
+
+    /* Who we are */
+    #aboutSection {
+      padding: 0.5rem 1.75rem 1.2rem;
+      border-top: 1px dashed var(--border);
+      font-size: 0.8rem;
+      display: grid;
+      grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+      gap: 1rem;
+    }
+
+    @media (max-width: 900px) {
+      #aboutSection {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    #aboutSection h3 {
+      font-size: 0.9rem;
+      margin-bottom: 0.3rem;
+    }
+
+    #aboutSection p {
+      color: var(--muted);
+      margin-bottom: 0.25rem;
+    }
+
+    #aboutSection strong {
+      color: var(--text);
+    }
+
+    .about-pill-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-top: 0.3rem;
+    }
+
+    .about-pill {
+      font-size: 0.75rem;
+      padding: 0.2rem 0.5rem;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: rgba(249, 250, 251, 0.9);
+    }
+
+    /* Toast */
+    .toast {
+      position: fixed;
+      right: 1rem;
+      bottom: 1rem;
+      padding: 0.7rem 0.9rem;
+      border-radius: 0.9rem;
+      background: #16a34a;
+      color: #ecfdf5;
+      font-size: 0.8rem;
+      box-shadow: 0 12px 25px rgba(22, 163, 74, 0.5);
+      opacity: 0;
+      transform: translateY(10px);
+      pointer-events: none;
+      transition: all 0.25s ease;
+      z-index: 40;
+    }
+
+    .toast.show {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+  </style>
+</head>
+<body>
+  <div class="app-shell">
+    <header>
+      <div class="brand">
+        <div class="brand-logo">FJ</div>
+        <div class="brand-text">
+          <h1>FerEnglish</h1>
+          <p>Inglés práctico con enfoque en resultados reales.</p>
+        </div>
+      </div>
+      <div class="header-actions">
+        <div class="pill">
+          <span class="level-dot"></span>
+          <span id="headerLevelText">Sin nivel</span>
+        </div>
+        <button id="toggleTheme" class="btn-small" type="button">
+          <span>Modo oscuro</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- Registro / elección de objetivo -->
+    <section id="authSection">
+      <div class="auth-grid">
+        <div>
+          <div class="hero-highlight">Nuevo</div>
+          <h2 class="hero-title">
+            Diseña tu ruta de inglés: básico, intermedio o avanzado.
+          </h2>
+          <p class="hero-text">
+            FerEnglish se adapta a tu meta: hablar como nativo, negocios,
+            estudios o uso general. Gana puntos, desbloquea insignias y
+            practica todos los días con actividades cortas.
+          </p>
+          <div class="hero-badges">
+            <span class="hero-badge">🇺🇸 Inglés americano</span>
+            <span class="hero-badge">🧠 Gramática y ortografía</span>
+            <span class="hero-badge">💬 Conversación real</span>
+            <span class="hero-badge">🎯 Objetivos por nivel</span>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-header">
+            <h2><span class="icon">🔑</span> Empieza tu camino</h2>
+          </div>
+          <p class="card-subtitle">
+            Regístrate para personalizar tu experiencia en FerEnglish.
+          </p>
+          <form id="authForm">
+            <div>
+              <label for="userName">Tu nombre</label>
+              <input
+                type="text"
+                id="userName"
+                placeholder="Ejemplo: Fer"
+                required
+              />
+            </div>
+            <div>
+              <label for="userGoal">¿Qué quieres lograr?</label>
+              <select id="userGoal" required>
+                <option value="">Selecciona una opción</option>
+                <option value="nativo">Hablar inglés como nativo</option>
+                <option value="negocios">Inglés para negocios</option>
+                <option value="estudios">Inglés para estudios</option>
+                <option value="viajes">Inglés para viajes</option>
+                <option value="general">Inglés general / día a día</option>
+              </select>
+            </div>
+            <div>
+              <label for="userLevel">Tu nivel actual</label>
+              <select id="userLevel" required>
+                <option value="basic">Básico (A1–A2)</option>
+                <option value="intermediate">Intermedio (B1–B2)</option>
+                <option value="advanced">Avanzado (C1–C2)</option>
+              </select>
+            </div>
+            <button class="btn-primary" type="submit">
+              Comenzar ahora
+              <span>▶</span>
+            </button>
+            <button
+              class="btn-secondary"
+              type="button"
+              id="continueGuest"
+            >
+              Entrar como invitado
+            </button>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contenido principal con lecciones, traductor, etc. -->
+    <section id="mainSection" class="content hidden">
+      <!-- Columna de lecciones -->
+      <div class="card">
+        <div class="card-header">
+          <h2><span class="icon">📚</span> Tu ruta de aprendizaje</h2>
+          <span id="welcomeText" style="font-size:0.78rem;color:var(--muted);">
+            Bienvenido(a)
+          </span>
+        </div>
+        <p class="card-subtitle">
+          Avanza por niveles: básico → intermedio → avanzado. Completa
+          lecciones y gana experiencia.
+        </p>
+
+        <div class="lesson-filters">
+          <select id="filterLevel" class="pill-select">
+            <option value="all">Todos los niveles</option>
+            <option value="basic">Sólo básico</option>
+            <option value="intermediate">Sólo intermedio</option>
+            <option value="advanced">Sólo avanzado</option>
+          </select>
+          <select id="filterTrack" class="pill-select">
+            <option value="all">Todos los objetivos</option>
+            <option value="nativo">Hablar como nativo</option>
+            <option value="negocios">Negocios</option>
+            <option value="estudios">Estudios</option>
+            <option value="viajes">Viajes</option>
+            <option value="general">Inglés general</option>
+          </select>
+          <span style="font-size:0.78rem;color:var(--muted);">
+            Sugerido por tu objetivo y nivel.
+          </span>
+        </div>
+
+        <div class="lesson-list" id="lessonList"></div>
+
+        <div class="xp-wrapper">
+          <div class="xp-bar">
+            <div id="xpFill" class="xp-fill"></div>
+          </div>
+          <div class="xp-label" id="xpLabel">0 XP · Nivel 1</div>
+        </div>
+        <div class="badge-row" id="badgeRow">
+          <!-- badges dinámicas -->
+        </div>
+      </div>
+
+      <!-- Columna de herramientas -->
+      <div class="tools-grid">
+        <!-- Traductor -->
+        <div class="card">
+          <div class="card-header">
+            <h2><span class="icon">🔁</span> Traductor EN ↔ ES</h2>
+          </div>
+          <p class="card-subtitle">
+            Practica, escribe y obtén una traducción de apoyo entre inglés
+            y español.
+          </p>
+          <div class="translator-layout">
+            <div>
+              <label for="direction">Dirección</label>
+              <div class="translator-controls">
+                <select id="direction" class="pill-select">
+                  <option value="en-es">Inglés → Español</option>
+                  <option value="es-en">Español → Inglés</option>
+                </select>
+                <button
+                  id="swapDirection"
+                  class="btn-ghost"
+                  type="button"
+                  style="font-size:0.78rem;"
+                >
+                  Cambiar dirección
+                </button>
+              </div>
+            </div>
+            <div>
+              <label for="sourceText">Texto</label>
+              <textarea
+                id="sourceText"
+                placeholder="Escribe aquí tu frase a traducir..."
+              ></textarea>
+            </div>
+            <div>
+              <label for="resultText">Traducción</label>
+              <textarea
+                id="resultText"
+                readonly
+                placeholder="Aquí verás la traducción aproximada..."
+              ></textarea>
+            </div>
+            <button id="btnTranslate" class="btn-primary" type="button">
+              Traducir
+            </button>
+            <p class="translator-note">
+              Nota: este traductor es <strong>educativo</strong>. Para textos
+              complejos, compáralo siempre con un diccionario o traductor
+              profesional.
+            </p>
+          </div>
+          <div class="stats">
+            <span class="stat-pill" id="statsWords">0 palabras hoy</span>
+            <span class="stat-pill" id="statsTranslations">0 traducciones</span>
+          </div>
+        </div>
+
+        <!-- Prácticas rápidas -->
+        <div class="card">
+          <div class="card-header">
+            <h2><span class="icon">⚡</span> Prácticas rápidas</h2>
+          </div>
+          <p class="card-subtitle">
+            Ejercicios cortos para reforzar gramática, vocabulario y
+            pronunciación.
+          </p>
+          <div class="mini-list">
+            <div class="mini-item">
+              <div>
+                <strong>Dictado rápido</strong>
+                <div class="mini-tag">Ortografía · Listening</div>
+              </div>
+              <button class="mini-btn" type="button" data-mini="dictado">
+                Empezar
+              </button>
+            </div>
+            <div class="mini-item">
+              <div>
+                <strong>Frases de negocios</strong>
+                <div class="mini-tag">Business English</div>
+              </div>
+              <button class="mini-btn" type="button" data-mini="negocios">
+                Empezar
+              </button>
+            </div>
+            <div class="mini-item">
+              <div>
+                <strong>Inglés para estudiantes</strong>
+                <div class="mini-tag">Redacción y vocabulario</div>
+              </div>
+              <button class="mini-btn" type="button" data-mini="estudios">
+                Empezar
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Recompensas -->
+        <div class="card">
+          <div class="card-header">
+            <h2><span class="icon">🎁</span> Recompensas y hábitos</h2>
+          </div>
+          <p class="card-subtitle">
+            Gana insignias según tu práctica diaria en FerEnglish.
+          </p>
+          <ul style="font-size:0.8rem;color:var(--muted);margin-left:1rem;">
+            <li>⭐ 50 XP: Explorador del inglés</li>
+            <li>💎 150 XP: Usuario constante</li>
+            <li>🏆 300 XP: Dominio avanzado</li>
+          </ul>
+          <p style="font-size:0.78rem;margin-top:0.4rem;color:var(--muted);">
+            Consejo: 15–20 minutos diarios son mejores que 2 horas una sola
+            vez por semana.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Quiénes somos -->
+    <section id="aboutSection">
+      <div>
+        <h3>¿Quiénes somos?</h3>
+        <p>
+          <strong>FerEnglish</strong> no es un sitio de pago. Es
+          <strong>un espacio gratuito y sin ánimo de lucro</strong> que busca
+          que más personas puedan aprender una lengua tan poderosa y útil
+          como el inglés, de manera ordenada y amigable.
+        </p>
+        <p>
+          Nuestro enfoque está en el inglés americano (USA), cuidando la
+          <strong>buena ortografía</strong>, la
+          <strong>gramática correcta</strong> y el uso real del idioma en
+          situaciones del día a día, negocios, estudios y viajes.
+        </p>
+        <p>
+          Creemos que el inglés se aprende <strong>practicando</strong> y
+          recibiendo <strong>retroalimentación constante</strong>. Por eso,
+          FerEnglish está diseñado para ser interactivo, motivador y con
+          sensación de progreso real.
+        </p>
+      </div>
+      <div>
+        <h3>¿Qué ofrece FerEnglish?</h3>
+        <div class="about-pill-row">
+          <span class="about-pill">📈 Niveles: básico, intermedio, avanzado</span>
+          <span class="about-pill">🎯 Rutas por objetivo (negocios, viajes, estudios)</span>
+          <span class="about-pill">🔁 Traductor educativo EN ↔ ES</span>
+          <span class="about-pill">✅ Recompensas por cada logro</span>
+          <span class="about-pill">🧩 Prácticas cortas diarias</span>
+        </div>
+        <p style="margin-top:0.4rem;color:var(--muted);">
+          Tu compromiso es estudiar. FerEnglish pone el camino y las
+          herramientas.
+        </p>
+      </div>
+    </section>
+  </div>
+
+  <div id="toast" class="toast"></div>
+
+  <script>
+    // ---------- Estado básico ----------
+    const state = {
+      user: null,
+      xp: 0,
+      levelProgress: 1,
+      translationsToday: 0,
+      wordsToday: 0,
+      completedLessons: new Set(),
+      lessons: [
+        // Básico general
+        {
+          id: 1,
+          title: "Saludos y presentaciones",
+          level: "basic",
+          track: "general",
+          xp: 10,
+          objective: "Presentarte y saludar correctamente.",
+          sample: "Hi, I’m Fer. Nice to meet you."
+        },
+        {
+          id: 2,
+          title: "Verbo to be (am / is / are)",
+          level: "basic",
+          track: "general",
+          xp: 12,
+          objective: "Construir oraciones simples con 'to be'.",
+          sample: "I am from Peru. You are a student."
+        },
+        {
+          id: 3,
+          title: "Vocabulario: familia y amigos",
+          level: "basic",
+          track: "general",
+          xp: 10,
+          objective: "Aprender palabras clave de familia.",
+          sample: "mother, father, sister, brother, friend."
+        },
+        // Negocios
+        {
+          id: 4,
+          title: "Presentaciones en reuniones",
+          level: "intermediate",
+          track: "negocios",
+          xp: 18,
+          objective: "Presentarte profesionalmente en inglés.",
+          sample: "Nice to meet you. I’m responsible for accounting."
+        },
+        {
+          id: 5,
+          title: "Correos formales (US English)",
+          level: "intermediate",
+          track: "negocios",
+          xp: 20,
+          objective: "Escribir emails claros y formales.",
+          sample: "Please find attached the report you requested."
+        },
+        // Estudios
+        {
+          id: 6,
+          title: "Paráfrasis académica",
+          level: "advanced",
+          track: "estudios",
+          xp: 22,
+          objective: "Reexpresar ideas sin copiar.",
+          sample: "In other words, the results suggest that..."
+        },
+        // Viajes
+        {
+          id: 7,
+          title: "En el aeropuerto",
+          level: "basic",
+          track: "viajes",
+          xp: 14,
+          objective: "Preguntar y responder en situaciones de vuelo.",
+          sample: "Where is the check-in counter?"
+        },
+        {
+          id: 8,
+          title: "Reservas de hotel",
+          level: "intermediate",
+          track: "viajes",
+          xp: 16,
+          objective: "Hacer reservas y resolver problemas.",
+          sample: "I have a reservation under the name..."
+        },
+        // Avanzado general
+        {
+          id: 9,
+          title: "Phrasal verbs comunes",
+          level: "advanced",
+          track: "nativo",
+          xp: 25,
+          objective: "Usar phrasal verbs en contexto.",
+          sample: "I need to figure out this problem."
+        }
+      ]
+    };
+
+    // ---------- Utilidades ----------
+    function showToast(message) {
+      const toast = document.getElementById("toast");
+      toast.textContent = message;
+      toast.classList.add("show");
+      setTimeout(() => toast.classList.remove("show"), 2500);
+    }
+
+    function saveState() {
+      const data = {
+        user: state.user,
+        xp: state.xp,
+        completedLessons: Array.from(state.completedLessons)
+      };
+      localStorage.setItem("ferEnglishData", JSON.stringify(data));
+    }
+
+    function loadState() {
+      const raw = localStorage.getItem("ferEnglishData");
+      if (!raw) return;
+      try {
+        const data = JSON.parse(raw);
+        if (data.user) state.user = data.user;
+        if (typeof data.xp === "number") state.xp = data.xp;
+        if (Array.isArray(data.completedLessons)) {
+          state.completedLessons = new Set(data.completedLessons);
+        }
+      } catch (e) {
+        console.warn("No se pudo cargar el estado guardado.");
+      }
+    }
+
+    function levelFromXp(xp) {
+      if (xp < 50) return 1;
+      if (xp < 150) return 2;
+      if (xp < 300) return 3;
+      return 4;
+    }
+
+    function xpToNextLevel(xp) {
+      if (xp < 50) return 50;
+      if (xp < 150) return 150;
+      if (xp < 300) return 300;
+      return 500;
+    }
+
+    // ---------- Render ----------
+    function updateHeaderAndWelcome() {
+      const headerLevelText = document.getElementById("headerLevelText");
+      const welcomeText = document.getElementById("welcomeText");
+
+      if (!state.user) {
+        headerLevelText.textContent = "Sin nivel";
+        welcomeText.textContent = "Bienvenido(a)";
+        return;
+      }
+
+      const levelMap = {
+        basic: "Básico",
+        intermediate: "Intermedio",
+        advanced: "Avanzado"
+      };
+      headerLevelText.textContent =
+        levelMap[state.user.level] || "En progreso";
+
+      let goalLabel = "";
+      switch (state.user.goal) {
+        case "nativo":
+          goalLabel = "Hablar como nativo";
+          break;
+        case "negocios":
+          goalLabel = "Negocios";
+          break;
+        case "estudios":
+          goalLabel = "Estudios";
+          break;
+        case "viajes":
+          goalLabel = "Viajes";
+          break;
+        case "general":
+        default:
+          goalLabel = "Inglés general";
+      }
+
+      welcomeText.textContent = `${state.user.name || "Estudiante"} · ${goalLabel}`;
+    }
+
+    function renderLessons() {
+      const list = document.getElementById("lessonList");
+      list.innerHTML = "";
+
+      const levelFilter = document.getElementById("filterLevel").value;
+      const trackFilter = document.getElementById("filterTrack").value;
+
+      const filtered = state.lessons.filter((lesson) => {
+        const matchLevel =
+          levelFilter === "all" || lesson.level === levelFilter;
+        const matchTrack =
+          trackFilter === "all" || lesson.track === trackFilter;
+        return matchLevel && matchTrack;
+      });
+
+      if (filtered.length === 0) {
+        const empty = document.createElement("div");
+        empty.style.fontSize = "0.8rem";
+        empty.style.color = "var(--muted)";
+        empty.textContent =
+          "No hay lecciones para este filtro todavía. Cambia el nivel u objetivo.";
+        list.appendChild(empty);
+        return;
+      }
+
+      filtered.forEach((lesson) => {
+        const card = document.createElement("div");
+        card.className = "lesson-card";
+
+        const left = document.createElement("div");
+        const right = document.createElement("div");
+        right.className = "lesson-actions";
+
+        const title = document.createElement("div");
+        title.className = "lesson-title";
+        title.textContent = lesson.title;
+
+        const meta = document.createElement("div");
+        meta.className = "lesson-meta";
+        meta.innerHTML = `
+          <span>XP: ${lesson.xp}</span>
+          <span>Nivel: ${
+            lesson.level === "basic"
+              ? "Básico"
+              : lesson.level === "intermediate"
+              ? "Intermedio"
+              : "Avanzado"
+          }</span>
+        `;
+
+        const objective = document.createElement("div");
+        objective.className = "lesson-objective";
+        objective.textContent = lesson.objective;
+
+        left.appendChild(title);
+        left.appendChild(meta);
+        left.appendChild(objective);
+
+        const btnShow = document.createElement("button");
+        btnShow.className = "btn-ghost";
+        btnShow.type = "button";
+        btnShow.textContent = "Ver ejemplo";
+
+        btnShow.addEventListener("click", () => {
+          alert(
+            `Ejemplo en inglés (US):\n\n${lesson.sample}\n\nTraduce y reescribe 3 variantes para practicar.`
+          );
+        });
+
+        const btnComplete = document.createElement("button");
+        btnComplete.className = "btn-complete";
+        btnComplete.type = "button";
+        btnComplete.innerHTML = "Marcar completado";
+
+        if (state.completedLessons.has(lesson.id)) {
+          btnComplete.classList.add("completed");
+          btnComplete.textContent = "Completado ✓";
+        }
+
+        btnComplete.addEventListener("click", () => {
+          if (state.completedLessons.has(lesson.id)) {
+            showToast("Esta lección ya fue marcada como completada.");
+            return;
+          }
+          state.completedLessons.add(lesson.id);
+          state.xp += lesson.xp;
+          saveState();
+          updateXpAndBadges();
+          btnComplete.classList.add("completed");
+          btnComplete.textContent = "Completado ✓";
+          showToast(
+            `¡Felicidades! Ganaste ${lesson.xp} XP por completar "${lesson.title}".`
+          );
+        });
+
+        right.appendChild(btnShow);
+        right.appendChild(btnComplete);
+
+        card.appendChild(left);
+        card.appendChild(right);
+
+        list.appendChild(card);
+      });
+    }
+
+    function updateXpAndBadges() {
+      const xpFill = document.getElementById("xpFill");
+      const xpLabel = document.getElementById("xpLabel");
+      const badgeRow = document.getElementById("badgeRow");
+
+      const xp = state.xp;
+      const currentLevel = levelFromXp(xp);
+      const nextCap = xpToNextLevel(xp);
+      const baseCap =
+        currentLevel === 1 ? 0 : currentLevel === 2 ? 50 : currentLevel === 3 ? 150 : 300;
+
+      const progress = ((xp - baseCap) / (nextCap - baseCap)) * 100;
+      xpFill.style.width = Math.max(5, Math.min(100, progress)) + "%";
+      xpLabel.textContent = `${xp} XP · Nivel ${currentLevel}`;
+
+      badgeRow.innerHTML = "";
+      const badges = [
+        { threshold: 50, label: "⭐ Explorador del inglés" },
+        { threshold: 150, label: "💎 Usuario constante" },
+        { threshold: 300, label: "🏆 Dominio avanzado" }
+      ];
+
+      badges.forEach((b) => {
+        const span = document.createElement("span");
+        span.className = "badge";
+        if (xp < b.threshold) span.classList.add("locked");
+        span.textContent = b.label;
+        badgeRow.appendChild(span);
+      });
+    }
+
+    function updateStats() {
+      document.getElementById(
+        "statsTranslations"
+      ).textContent = `${state.translationsToday} traducciones`;
+      document.getElementById(
+        "statsWords"
+      ).textContent = `${state.wordsToday} palabras hoy`;
+    }
+
+    // ---------- Traductor sencillo ----------
+    const dictionaryEnEs = {
+      hello: "hola",
+      hi: "hola",
+      "good morning": "buenos días",
+      "good night": "buenas noches",
+      thanks: "gracias",
+      "thank you": "gracias",
+      "how are you?": "¿cómo estás?",
+      student: "estudiante",
+      work: "trabajo",
+      business: "negocios",
+      english: "inglés",
+      "i am": "yo soy",
+      "i'm": "yo soy",
+      "see you later": "nos vemos luego"
+    };
+
+    const dictionaryEsEn = {
+      hola: "hello",
+      "buenos días": "good morning",
+      "buenas noches": "good night",
+      gracias: "thank you",
+      "¿cómo estás?": "how are you?",
+      estudiante: "student",
+      trabajo: "work",
+      negocios: "business",
+      inglés: "english",
+      "nos vemos luego": "see you later"
+    };
+
+    function simpleTranslate(text, direction) {
+      const lower = text.toLowerCase().trim();
+      const dict = direction === "en-es" ? dictionaryEnEs : dictionaryEsEn;
+
+      if (dict[lower]) {
+        return dict[lower];
+      }
+
+      // Traducción palabra por palabra muy simple
+      const words = lower.split(/\s+/);
+      const translatedWords = words.map((w) => dict[w] || w);
+      return translatedWords.join(" ");
+    }
+
+    // ---------- Eventos ----------
+    document.addEventListener("DOMContentLoaded", () => {
+      loadState();
+
+      const authSection = document.getElementById("authSection");
+      const mainSection = document.getElementById("mainSection");
+
+      if (state.user) {
+        authSection.classList.add("hidden");
+        mainSection.classList.remove("hidden");
+        document.getElementById("filterLevel").value = state.user.level;
+        document.getElementById("filterTrack").value = state.user.goal || "all";
+      }
+
+      updateHeaderAndWelcome();
+      renderLessons();
+      updateXpAndBadges();
+      updateStats();
+
+      // Formulario de registro
+      document.getElementById("authForm").addEventListener("submit", (e) => {
+        e.preventDefault();
+        const name = document.getElementById("userName").value.trim() || "Estudiante";
+        const goal = document.getElementById("userGoal").value;
+        const level = document.getElementById("userLevel").value;
+
+        state.user = { name, goal, level };
+        saveState();
+
+        authSection.classList.add("hidden");
+        mainSection.classList.remove("hidden");
+
+        document.getElementById("filterLevel").value = level;
+        document.getElementById("filterTrack").value = goal || "all";
+
+        updateHeaderAndWelcome();
+        renderLessons();
+        showToast(`Bienvenido(a), ${name}. Tu ruta ha sido configurada.`);
+      });
+
+      // Entrar como invitado
+      document
+        .getElementById("continueGuest")
+        .addEventListener("click", () => {
+          state.user = {
+            name: "Invitado",
+            goal: "general",
+            level: "basic"
+          };
+          saveState();
+          authSection.classList.add("hidden");
+          mainSection.classList.remove("hidden");
+          document.getElementById("filterLevel").value = "basic";
+          document.getElementById("filterTrack").value = "general";
+          updateHeaderAndWelcome();
+          renderLessons();
+          showToast("Entraste como invitado. Luego puedes cambiar tu objetivo.");
+        });
+
+      // Filtros de lecciones
+      document
+        .getElementById("filterLevel")
+        .addEventListener("change", renderLessons);
+      document
+        .getElementById("filterTrack")
+        .addEventListener("change", renderLessons);
+
+      // Botón de tema oscuro
+      document.getElementById("toggleTheme").addEventListener("click", () => {
+        document.body.classList.toggle("dark");
+      });
+
+      // Traductor
+      document.getElementById("btnTranslate").addEventListener("click", () => {
+        const direction = document.getElementById("direction").value;
+        const source = document.getElementById("sourceText").value;
+        if (!source.trim()) {
+          showToast("Escribe un texto para traducir.");
+          return;
+        }
+        const result = simpleTranslate(source, direction);
+        document.getElementById("resultText").value = result;
+
+        const words = source.trim().split(/\s+/).length;
+        state.translationsToday += 1;
+        state.wordsToday += words;
+        updateStats();
+      });
+
+      document
+        .getElementById("swapDirection")
+        .addEventListener("click", () => {
+          const select = document.getElementById("direction");
+          select.value = select.value === "en-es" ? "es-en" : "en-es";
+        });
+
+      // Mini prácticas
+      document.querySelectorAll(".mini-btn").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          const type = btn.getAttribute("data-mini");
+          if (type === "dictado") {
+            alert(
+              "Dictado rápido:\n\n1) Escoge una frase en inglés (por ejemplo: 'I have a meeting tomorrow morning').\n2) Escríbela en tu cuaderno solo escuchándola en tu mente.\n3) Luego compárala con la versión correcta y corrige ortografía."
+            );
+          } else if (type === "negocios") {
+            alert(
+              "Frases de negocios:\n\nEscribe 3 correos cortos en inglés:\n- Pidiendo información.\n- Enviando un archivo adjunto.\n- Agradeciendo una reunión.\n\nUsa expresiones como:\n- 'Could you please...'\n- 'Please find attached...'\n- 'Thank you for your time.'"
+            );
+          } else if (type === "estudios") {
+            alert(
+              "Inglés para estudiantes:\n\n1) Elige un párrafo de un texto académico en español.\n2) Intenta escribirlo en inglés usando tu propio vocabulario.\n3) Revisa estructuras como: 'In addition', 'However', 'On the other hand'."
+            );
+          }
+        });
+      });
+    });
+  </script>
+</body>
+</html>
